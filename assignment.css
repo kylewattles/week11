@@ -1,0 +1,56 @@
+.body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.ticTacToe {
+    background-color: rgb(4, 163, 163);
+    border: 7px solid black;
+    height:400px;
+    width:400px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ticTacToe .column {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ticTacToe .square {
+    width: 125px;
+    height: 125px;
+    border: 1px solid #e4e4e4;
+    text-align: center;
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ padding:20px;
+}
+.ticTacToeImage {
+    
+    margin-right: 20px;
+    border: solid 10px;
+    border-color: black;
+    height: 400px;
+    width: 400px;
+    border-radius: 0px 200px 0px 200px;
+}
+
+.toeBody {
+    background: linear-gradient(to bottom, black, limegreen);
+}
+
+.toeHistory {
+    color: rgb(10, 221, 245);
+}
+
+.toeHead {
+    color: rgb(10, 221, 245);
+}
