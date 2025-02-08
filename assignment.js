@@ -49,7 +49,18 @@ const isWinner = () => {
 
 
 };
-     
+  
+const resetButton = document.getElementById("resetButton");
+resetButton.addEventListener("click", (reset) => {
+  squares.forEach((square) => {
+    square.textContent = "";
+  });
+  isPlayerOneTurn = true;
+  playerOneChoices.length = 0;
+  playerTwoChoices.length = 0;
+  playerTurn.textContent = 'Player One Turn';
+});
+
 
 
 
