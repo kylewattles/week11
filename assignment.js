@@ -1,5 +1,6 @@
+document.addEventListener("DOMContentLoaded", (event) => {
 const squares = document.querySelectorAll('.square');
-console.log(squares);
+
 
 const playerTurn = document.querySelector('#playerTurn');
 let isPlayerOneTurn = true;
@@ -17,11 +18,11 @@ const winningCombos = [
   [2, 4, 6]
   
 ];
-console.log(winningCombos);
+
 
 squares.forEach((square) => {
   square.addEventListener('click', (event) => {
-    console.log("click");
+    
     
     const index = event.target.dataset.index;
     if (isPlayerOneTurn) {
@@ -51,7 +52,10 @@ const isWinner = () => {
 };
   
 const resetButton = document.getElementById("resetButton");
-resetButton.addEventListener("click", (reset) => {
+
+
+resetButton.addEventListener("click", (event) => {
+  console.log("reset button clicked");
   squares.forEach((square) => {
     square.textContent = "";
   });
@@ -59,8 +63,8 @@ resetButton.addEventListener("click", (reset) => {
   playerOneChoices.length = 0;
   playerTwoChoices.length = 0;
   playerTurn.textContent = 'Player One Turn';
+  });
 });
-
 
 
 
