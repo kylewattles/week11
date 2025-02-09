@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-const squares = document.querySelectorAll('.square');
+//setting my variables and my arrays for winning combos
+let squares = document.querySelectorAll('.square');
 
 
-const playerTurn = document.querySelector('#playerTurn');
+let playerTurn = document.querySelector('#playerTurn');
 let isPlayerOneTurn = true;
 
-const playerOneChoices = [];
-const playerTwoChoices = [];
+let playerOneChoices = [];
+let playerTwoChoices = [];
 const winningCombos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -19,40 +19,57 @@ const winningCombos = [
   
 ];
 
-
-squares.forEach((square) => {
-  square.addEventListener('click', (event) => {
-    
-    
-    const index = event.target.dataset.index;
-    if (isPlayerOneTurn) {
-      playerTurn.textContent = 'Player One Turn';
+//checks to verify that the winning array is in fact a winner and then displays an alert
+let isWinner = (winningArray, playerArray, yourPlayer) => {
+  let filterArray = [];
+  winningArray.forEach(function(index){
+    filterArray = index.filter(number => playerArray.includes(number));
+    if (arraysAreEqual(filterArray,index)){
+      $("#winnerAlert").text(`${yourPlayer} WINS!!!`);
+      $("#winnerAlert").toggle();
       
+    };
+    
+  })
+}
+//checks for a match between the chosen squares of the player to the array of winning combos"
+let arraysAreEqual = (array1, array2) => {
+  if(array1.length !== array2.length) return false;
+  for (let i= 0; i < array1.length; i++){
+      if (array1[i] !== array2[i]) return false;
+  }
+  return true;
+}
+
+//uses an if else statement to handle the actual back and forth aspect fo tic tac toe formatted with each player on either side of the else statement and switches back and forth while also keeping track of the players choices to be used in comparison with winning array
+squares.forEach((square) => {
+  square.addEventListener('click', (event) => { 
+    const index = event.target.dataset.index;
+    if (isPlayerOneTurn && event.target.textContent == "") {
       if (event.target.textContent === "") {
-        event.target.textContent = "X"
+        event.target.textContent = "X" 
+        playerTurn.textContent = 'Player Two Turn';
         
-      }
-     
+      }     
       playerOneChoices.push(parseInt(index));
+      isWinner(winningCombos,playerOneChoices,"Player 1") 
     } else {
-       if (event.target.textContent === "") {
+      if (event.target.textContent === "") {
         event.target.textContent = "O"
-       }
+        playerTurn.textContent = 'Player One Turn';
+      }
       playerTwoChoices.push(parseInt(index));
-      playerTurn.textContent = 'Player Two Turn';
+      isWinner(winningCombos,playerTwoChoices, "Player 2")
     }
     console.log('playerOneChoices', playerOneChoices);
     console.log('playerTwoChoices', playerTwoChoices);
     isPlayerOneTurn = !isPlayerOneTurn;
   });
 });
-const isWinner = () => {
 
-
-};
-  
+ 
+  //resets the game
 const resetButton = document.getElementById("resetButton");
-
 
 resetButton.addEventListener("click", (event) => {
   console.log("reset button clicked");
@@ -60,11 +77,18 @@ resetButton.addEventListener("click", (event) => {
     square.textContent = "";
   });
   isPlayerOneTurn = true;
-  playerOneChoices.length = 0;
-  playerTwoChoices.length = 0;
+  playerOneChoices = [];
+  playerTwoChoices = [];
   playerTurn.textContent = 'Player One Turn';
+  $("#winnerAlert").text(` game already reset.`);
+      $("#winnerAlert").toggle();
+      
   });
-});
+
+
+
+  
+
 
 
 
